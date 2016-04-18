@@ -1,0 +1,135 @@
+# host_vars/pr0011.yml
+---
+el7_firewall_allow_ports:
+  - 21/tcp
+  - 20/tcp
+el7_firewall_allow_services:
+  - ftp
+  - samba
+
+el7_user_groups:
+  - directie
+  - verzekeringen
+  - financieringen
+  - beheer
+  - staf
+  - users
+
+el7_users:
+  - name: franka
+    password:
+    comment: 'Frank Assengraaf'
+    groups:
+       - directie
+       - verzekeringen
+       - financieringen
+       - staf
+       - users
+    shell: /sbin/nologin
+  - name: femkevdv
+    password: 
+    comment: 'Femke Van de Vorst'
+    groups:
+       - staf
+       - users
+    shell: /sbin/nologin
+  - name: hansb
+    password: 
+    comment: 'Hans Berghuis'
+    groups:
+       - verzekeringen
+       - users
+    shell: /sbin/nologin
+  - name: peterj
+    password: 
+    comment: 'Peter Jongsma'
+    groups:
+       - financieringen
+       - users
+    shell: /sbin/nologin
+  - name: kimberlyvh
+    password: 
+    comment: 'Kimberly Van Herk'
+    groups:
+       - verzekeringen
+       - users
+    shell: /sbin/nologin
+  - name: taniav
+    password: 
+    comment: 'Tania Versantvoort'
+    groups:
+       - verzekeringen
+       - users
+    shell: /sbin/nologin
+  - name: maaiked
+    password: 
+    comment: 'Maaike Doorn'
+    groups:
+       - directie
+       - verzekeringen
+       - financieringen
+       - staf
+       - beheer
+       - users
+  - name: matthias
+    password: 
+    comment: Administrator
+    groups:
+       - wheel
+       - directie
+       - verzekeringen
+       - financieringen
+       - staf
+       - beheer
+       - users
+
+samba_netbios_name: FILES
+samba_workgroup: LINUXLAB
+samba_load_homes: true
+
+samba_users:
+  - name: franka
+    password: franka
+  - name: femkevdv
+    password: femkevdv
+  - name: hansb
+    password: hansb
+  - name: peterj
+    password: peterj
+  - name: kimberlyvh
+    password: kimberlyvh
+  - name: taniav
+    password: taniav
+  - name: maaiked
+    password: maaiked
+  - name: matthias
+    password: matthias
+    
+samba_shares:
+  - name: directie
+    group: directie
+    write_list: +directie, femkevdv
+    valid_users: +directie, femkevdv
+  - name: financieringen
+    group: financieringen
+    write_list: +financieringen
+  - name: staf
+    group: staf
+    write_list: +staf
+  - name: verzekeringen
+    group: verzekeringen
+    write_list: +verzekeringen
+  - name: publiek
+    public: yes
+    write_list: +users
+    group: users
+    setype: public_content_t
+  - name: beheer
+    group: beheer
+    write_list: +beheer
+    valid_users: +beheer
+    directory_mode: 770
+  - name: homes
+    group: users
+    write_list: +users
+    valid_users: +users

@@ -1,0 +1,23 @@
+#pr001 
+---
+dhcp_global_default_lease_time: 14400
+dhcp_global_max_lease_time: 43200
+dhcp_global_subnet_mask: 255.255.0.0
+dhcp_global_broadcast_address: 172.16.255.255
+dhcp_global_routers: 172.16.255.254
+dhcp_global_domain_name_servers:
+  - 192.0.2.10
+  - 192.0.2.11
+
+dhcp_subnets:
+  - ip: 172.16.0.0
+    netmask: 255.255.0.0
+    range_begin: 172.16.100.1
+    range_end: 172.16.255.253
+    hosts:
+      - name: host
+        mac: '70:18:8B:A2:DF:8D'
+        ip: 172.16.0.1
+      - name: kali
+        mac: '08:00:27:6A:D8:50'
+        ip: 172.16.10.11

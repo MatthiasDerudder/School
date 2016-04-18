@@ -1,0 +1,10 @@
+Name,GivenName,Surname,DisplayName,SAMAccountName,Description,Password,Security
+Yoda,Yoda,,Yoda,Yod,Green,P@ssw0rd!,Jedi
+Luke Skywalker,Luke,Skywalker,Luke Skywalker,LukSky,Bad ass,P@ssw0rd!,Jedi
+Obi wan Kenobi,Obi,Kenobi,Obi w. Kenobi,ObiKen,Obi,P@ssw0rd!,Jedi
+Mace Windu,Mace,Windu,Mace Windu,MaxWin,Windu,P@ssw0rd!,Jedi
+C-3PO,C,3PO,C-3PO,C3PO,C-3PO,P@ssw0rd!,Jedi
+Dooku,Dooku,,Dooky,Doo,Lord Dooku,P@ssw0rd!,Empire
+Anakin Skywalker,Anakin,Skywalker,Anakin Skywalker,AnaSky,Anakin,P@ssw0rd!,Empire
+Flint,flint,,Flint,Fli,Flint,P@ssw0rd!,Empire
+Malorum,Marorum,,Malorum,Mal,Malorum,P@ssw0rd!,Empire

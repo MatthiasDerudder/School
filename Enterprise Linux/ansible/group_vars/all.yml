@@ -1,0 +1,45 @@
+# group_vars/all.yml
+# Variables visible to all nodes
+---
+el7_firewall_allow_services:
+  - http
+  - https
+  - ssh
+  - dns
+  - samba
+  - ftp
+el7_users:
+  - name: 'matthias'
+    comment: 'Administrator'
+    password: 
+    groups:
+      - "wheel"
+el7_admin_user: 'matthias'
+el7_motd: TRUE
+el7_repositories:
+  - epel-release
+el7_install_packages:
+  - bash-completion
+  - policycoreutils
+  - setroubleshoot-server
+  - tree
+  - vim-enhanced
+  - wget
+  - tar
+  - nano
+  - git
+  - bind-utils
+el7_admin_ssh_key: 'ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQCssMOQgH4wr4Y2TbQW1I8STT03YGFS6a2SA0lYpkl6LciT3vPj8Dx6cjIKT1I6f1dO41fIuvpyE4tHmfHeVGhz9qVqdzNBFeyNJurC1c2WYhycrjzeQM1eB8ghHHT5oLgerf/3y+E1ByBGo/oU3aVFTeBKhW+RmUgQzemInadHNJGQ2yv+zkJz8ohaCCWTmfMoDRCPy2Kl3F7iou8k6Au5dPqkhPJF869dOaR3MMu5WDWXY6+8Aawkxu1BgrT1vLgqovM4Jr6RGYq/pc2TUhgvtHykClyTWyx2STXEl8JmqjrT5Xk0JJNuauESH9g1gTEAHUfpsHL63fNqg1c7Vvwj'
+
+mariadb_databases:
+  - wordpress
+mariadb_users:
+  - name: admin
+    password: admin
+    priv: 'wordpress.*:ALL'
+
+mariadb_root_password: admin
+
+wordpress_database: wordpress
+wordpress_user: admin
+wordpress_password: admin

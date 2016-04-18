@@ -1,0 +1,86 @@
+# ISC DHCPD configuration -- don't edit manually!
+#
+# {{ ansible_managed }}
+
+# Global options
+
+{% if dhcp_global_default_lease_time is defined %}
+default-lease-time {{ dhcp_global_default_lease_time }};
+{% endif %}
+{% if dhcp_global_max_lease_time is defined %}
+max-lease-time {{ dhcp_global_max_lease_time }};
+{% endif %}
+{% if dhcp_global_subnet_mask is defined %}
+option subnet-mask {{ dhcp_global_subnet_mask }};
+{% endif %}
+{% if dhcp_global_broadcast_address is defined %}
+option broadcast-address {{ dhcp_global_broadcast_address }};
+{% endif %}
+{% if dhcp_global_routers is defined %}
+option routers {{ dhcp_global_routers }};
+{% endif %}
+{% if dhcp_global_domain_name is defined %}
+option domain-name "{{ dhcp_global_domain_name }}";
+{% endif %}
+{% if dhcp_global_domain_name_servers is defined %}
+{% if dhcp_global_domain_name_servers is string %}
+option domain-name-servers {{ dhcp_global_domain_name_servers }};
+{% else %}
+option domain-name-servers {{ dhcp_global_domain_name_servers|join(', ') }};
+{% endif %}
+{% endif %}
+{% if dhcp_global_domain_search is defined %}
+{% if dhcp_global_domain_search is string %}
+option domain-search {{ dhcp_global_domain_search }};
+{% else %}
+option domain-search {{ dhcp_global_domain_search|join(', ') }};
+{% endif %}
+{% endif %}
+
+{# Template for global option
+{% if dhcp_global_OPT is defined %}
+option OPT {{ dhcp_global_OPT }};
+{% endif %}
+#}
+# Subnet declarations
+
+{% for subnet in dhcp_subnets %}
+subnet {{ subnet.ip }} netmask {{ subnet.netmask }} {
+{% if subnet.default_lease_time is defined %}
+  default-lease-time {{ subnet.default_lease_time }};
+{% endif %}
+{% if subnet.max_lease_time is defined %}
+  max-lease-time {{ subnet.max_lease_time }};
+{% endif %}
+{% if subnet.routers is defined %}
+  option routers {{ subnet.routers }};
+{% endif %}
+{% if subnet.subnet_mask is defined %}
+  option subnet-mask {{ subnet.subnet_mask }};
+{% endif %}
+{% if subnet.domain_search is defined %}
+  option domain-search {{ subnet.domain_search }};
+{% endif %}
+{% if subnet.domain_name_servers is defined %}
+{% if subnet.domain_name_servers is string %}
+  option domain-name-servers {{ subnet.domain_name_servers }};
+{% else %}
+  option domain-name-servers {{ subnet.domain_name_servers|join(', ') }};
+{% endif %}
+{% endif %}
+{% if subnet.range_begin is defined and subnet.range_end is defined %}
+  range {{ subnet.range_begin }} {{ subnet.range_end }};
+{% endif %}
+{% if subnet.hosts is defined %}
+
+{% for host in subnet.hosts %}
+  host {{ host.name }} {
+    hardware ethernet {{ host.mac }};
+    fixed-address {{ host.ip }};
+  }
+{% endfor %}
+{% endif %}
+}
+
+{% endfor %}
+
